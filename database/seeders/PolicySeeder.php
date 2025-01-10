@@ -14,45 +14,45 @@ class PolicySeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 6; $i++) {
-            Policy::create([
-                'name'=> fake()->name,
-                'description'=> fake()->text()
-            ]);
-        }
+//        for ($i = 1; $i <= 6; $i++) {
+//            Policy::create([
+//                'name'=> fake()->name,
+//                'description'=> fake()->text()
+//            ]);
+//        }
 
-//        $policy= collect(
-//            [
-//                [
-//                    'name' => 'dk0',
-//                    'description' => 'dk000'
-//                ],
-//                [
-//                    'name' => 'dk1',
-//                    'description' => 'dk1111'
-//                ],
-//                [
-//                    'name' => 'dk2',
-//                    'description' => 'dk2222'
-//                ],
-//                [
-//                    'name' => 'dk3',
-//                    'description' => 'dk3333'
-//                ],
-//                [
-//                    'name' => 'dk4',
-//                    'description' => 'dk444'
-//                ],
-//                [
-//                    'name' => 'dk5',
-//                    'description' => 'dk5555'
-//                ]
-//
-//            ]
-//        );
-//        $policy->each(function ($item) {
-//            Policy::insert($item);
-//        });
+        $policy= collect(
+            [
+                [
+                    'type' => 'dk0',
+                    'description' => 'dk000'
+                ],
+                [
+                    'type' => 'dk1',
+                    'description' => 'dk1111'
+                ],
+                [
+                    'type' => 'dk2',
+                    'description' => 'dk2222'
+                ],
+                [
+                    'type' => 'dk3',
+                    'description' => 'dk3333'
+                ],
+                [
+                    'type' => 'dk4',
+                    'description' => 'dk444'
+                ],
+                [
+                    'type' => 'dk5',
+                    'description' => 'dk5555'
+                ]
+
+            ]
+        );
+        $policy->each(function ($item) {
+            Policy::insert($item);
+        });
 //        Policy::factory()->create([
 //            'name' => 'dk',
 //            'description' => 'dk'
