@@ -30,7 +30,6 @@ class BrandController extends Controller
         catch (Exception $e) {
             return response()->json([
                 'status' => 'fail',
-//              'message' => $e->getMessage()
                 'message' => 'Brand not added!'
             ]);
         }

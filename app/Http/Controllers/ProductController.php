@@ -12,18 +12,18 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function ListProductByCategory(Request $request)
+    public function ListProductByCategory(Request $request):JsonResponse
     {
         $data = Product::where('category_id', $request->id)->with('brand','category')->get();
         return ResponseHelper::Out('success',$data,200);
     }
-    public function ListProductByRemark(Request $request)
+    public function ListProductByRemark(Request $request):JsonResponse
     {
         $data = Product::where('remark', $request->remark)->with('brand','category')->get();
         return ResponseHelper::Out('success',$data,200);
     }
 
-    public function ListProductByBrand(Request $request)
+    public function ListProductByBrand(Request $request):JsonResponse
     {
         $data = Product::where('brand_id', $request->id)->with('brand','category')->get();
         return ResponseHelper::Out('success',$data,200);
@@ -33,35 +33,21 @@ class ProductController extends Controller
         $data =ProductSlider::all();
         return ResponseHelper::Out('success',$data,200);
     }
-    public function ProductDetailsById(Request $request)
+    public function ProductDetailsById(Request $request):JsonResponse
     {
         $data=ProductDetails::where('product_id', $request->id)->with('product','product.brand','product.category')->get();
         return ResponseHelper::Out('success',$data,200);
     }
     public function ListReviewByProduct(Request $request):JsonResponse
     {
-        $data =ProductReview::where('product_id', $request->product_id)->with(['profile'=>function ($query) {
-
+        $data =ProductReview::where('product_id', $request->product_id)
+            ->with(['profile'=>function ($query) {                              // Advance join use, "profile" function is called into user Model
+                $query->select('id','cus_name');
         }])->get();
         return ResponseHelper::Out('success',$data,200);
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
