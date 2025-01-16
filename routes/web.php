@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\TokenAuthenticate;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,3 +43,7 @@ Route::post('/add-category',[CategoryController::class,'addCategory']);
 Route::get('/UserLogin/{UserEmail}', [UserController::class, 'UserLogin']);
 Route::get('/VerifyLogin/{UserEmail}/{OTP}', [UserController::class, 'VerifyLogin']);
 Route::get('/logout',[UserController::class,'UserLogout']);
+
+// User Profile
+Route::post('/create-profile',[CustomerProfileController::class,'createProfile'])->middleware([TokenAuthenticate::class]);
+Route::get('/user-profile',[CustomerProfileController::class,'ReadProfile'])->middleware([TokenAuthenticate::class]);

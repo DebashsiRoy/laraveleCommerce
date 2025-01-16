@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'http://127.0.0.1:8000/add-brand',
             'http://127.0.0.1:8000/add-category',
             'http://127.0.0.1:8000/add-policy',
+            'http://127.0.0.1:8000/create-profile'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
