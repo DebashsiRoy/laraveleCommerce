@@ -1,53 +1,39 @@
 <?php
 
 namespace App\Helper;
-
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Exception;
 
 class JWTToken
 {
-    public static function createToken($userEmail,$userID):string
+    public static function CreateToken($userEmail,$userID):string
     {
-        $key= env('JWT_KEY');
-        $payload = [
-            "iss" => 'dk_token',
-            "iat" => time(),
-            'exp' => time() + 60 * 60,
-            'userEmail' => $userEmail,
-            'userID' => $userID
+        $key =env('dk_key');
+        $payload=[
+            'iss'=>'laravel-token',
+            'iat'=>time(),
+            'exp'=>time()+24*60*60,
+            'userEmail'=>$userEmail,
+            'userID'=>$userID
         ];
-        return JWT::encode($payload, $key, "HS256");
+        return JWT::encode($payload,$key,'HS256');
     }
-    public static function createTokenForPasswordReset($userEmail):string
-    {
-        $key= env('JWT_KEY');
-        $payload = [
-            "iss" => 'dk_token',
-            "iat" => time(),
-            'exp' => time() + 60 * 5,
-            'userEmail' => $userEmail,
-            'userID' => '0'
-        ];
-        return JWT::encode($payload, $key, "HS256");
-    }
-    public static function verifyToken($token):string|object
+
+    public static function ReadToken($token): string|object
     {
         try {
             if($token==null){
                 return 'unauthorized';
             }
             else{
-                $key =env('JWT_KEY');
-                $decode=JWT::decode($token,new Key($key,'HS256'));
-                return $decode;
+                $key =env('dk_key');
+                return JWT::decode($token,new Key($key,'HS256'));
             }
         }
         catch (Exception $e){
             return 'unauthorized';
         }
     }
-
-
-
-
 }
+
