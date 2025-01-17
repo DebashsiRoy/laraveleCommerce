@@ -85,13 +85,13 @@ class ProductController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Product added successfully!'
-            ]);
+            ],200);
         }
         catch (Exception $e) {
             return response()->json([
                 'status' => 'fail',
                 'message' => 'Product not added!'
-            ]);
+            ],200);
         }
     }
 

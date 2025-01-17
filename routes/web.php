@@ -22,6 +22,9 @@ Route::get('/categoryList',[CategoryController::class,'categoryList']);
 
 // Policy list
 Route::get('/policy-list',[PolicyController::class,'policyList']);
+Route::post('/add-policy',[PolicyController::class,'addPolicy']);
+
+
 Route::post('/create-product',[ProductController::class,'CreateProduct']);
 
 // Product list
