@@ -59,3 +59,8 @@ Route::post('/create-product-review',[ProductController::class,'CreateProductRev
 Route::get('/createWishList/{product_id}',[ProductController::class,'CreateWishlist'])->middleware([TokenAuthenticate::class]);
 Route::get('/ProductWishlist',[ProductController::class,'ProductWishlist'])->middleware([TokenAuthenticate::class]);
 Route::get('/RemoveWishlist/{product_id}',[ProductController::class,'RemoveWishlist'])->middleware([TokenAuthenticate::class]);
+
+// Product Cart
+Route::post('/create-cart',[ProductController::class,'CreateProductCrtList'])->middleware([TokenAuthenticate::class]);
+Route::get('/CartList',[ProductController::class,'CartList'])->middleware([TokenAuthenticate::class]);
+Route::get('/RemoveCart/{product_id}',[ProductController::class,'RemoveCart'])->middleware([TokenAuthenticate::class]);
