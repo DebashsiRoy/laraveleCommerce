@@ -18,18 +18,16 @@ return new class extends Migration
             $table->string('price',50);
             $table->boolean('discount');
             $table->string('discount_price',50);
-            $table->string('image',50);
+            $table->string('image');
             $table->boolean('stock');
             $table->float('star');
             $table->enum('remark',['populer','new','top','special','trending','regular']);
 
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('brand_id');
-
             $table->foreign('category_id')->references('id')->on('categories')
                 ->cascadeOnUpdate()
-                ->restrictOnDelete();
-
+                ->restrictOnDelete();            ;
+            $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')->references('id')->on('brands')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();

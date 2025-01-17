@@ -22,6 +22,7 @@ Route::get('/categoryList',[CategoryController::class,'categoryList']);
 
 // Policy list
 Route::get('/policy-list',[PolicyController::class,'policyList']);
+Route::post('/create-product',[ProductController::class,'CreateProduct']);
 
 // Product list
 Route::get('/ListProductByCategory/{id}',[ProductController::class,'ListProductByCategory']);
@@ -47,3 +48,6 @@ Route::get('/logout',[UserController::class,'UserLogout']);
 // User Profile
 Route::post('/create-profile',[CustomerProfileController::class,'createProfile'])->middleware([TokenAuthenticate::class]);
 Route::get('/user-profile',[CustomerProfileController::class,'ReadProfile'])->middleware([TokenAuthenticate::class]);
+
+// Product Review
+Route::post('/create-product-review',[ProductController::class,'CreateProductReview'])->middleware([TokenAuthenticate::class]);
