@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductDetails;
 use App\Models\ProductReview;
 use App\Models\ProductSlider;
+use App\Models\ProductWish;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -49,6 +50,28 @@ class ProductController extends Controller
         return ResponseHelper::Out('success',$data,200);
     }
 
+    public function CreateWishlist(Request $request):JsonResponse
+    {
+        $user_id=$request->header('id');
+        $data=ProductWish::updateOrCreate(
+            ['user_id'=>$user_id, 'product_id'=>$request->product_id],   // This is for match user id
+            ['user_id'=>$user_id, 'product_id'=>$request->product_id]       // This is for create or update
+        );
+        return ResponseHelper::Out('success',$data,200);
+    }
+    public function ProductWishlist(Request $request):JsonResponse
+    {
+        $user_id=$request->header('id');
+        $data=ProductWish::where('user_id',$user_id)->with('product')->get();
+        return ResponseHelper::Out('success',$data,200);
+    }
+
+    public function RemoveWishlist(Request $request):JsonResponse
+    {
+        $user_id=$request->header('id');
+        $data=ProductWish::where(['user_id'=>$user_id,'product_id'=>$request->product_id])->delete();
+        return ResponseHelper::Out('success',$data,200);
+    }
     public function CreateProductReview(Request $request):JsonResponse
     {
         $user_id=$request->header('id');

@@ -54,3 +54,8 @@ Route::get('/user-profile',[CustomerProfileController::class,'ReadProfile'])->mi
 
 // Product Review
 Route::post('/create-product-review',[ProductController::class,'CreateProductReview'])->middleware([TokenAuthenticate::class]);
+
+// Product Wish
+Route::get('/createWishList/{product_id}',[ProductController::class,'CreateWishlist'])->middleware([TokenAuthenticate::class]);
+Route::get('/ProductWishlist',[ProductController::class,'ProductWishlist'])->middleware([TokenAuthenticate::class]);
+Route::get('/RemoveWishlist/{product_id}',[ProductController::class,'RemoveWishlist'])->middleware([TokenAuthenticate::class]);
