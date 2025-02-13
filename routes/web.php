@@ -3,18 +3,24 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerProfileController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SslcommerzAccountController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\TokenAuthenticate;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-// Page route
+Route::get('/',[HomeController::class,'homePage'])->name('home');
 
+// Page route
+Route::get('/paymentSuccess',[HomeController::class,'paymentSuccess']);
+Route::get('/paymentFail',[HomeController::class,'paymentFail']);
+Route::get('/paymentCancel',[HomeController::class,'paymentCancel']);
 // Brand list
+Route::get('/brandList',[BrandController::class,'BrandList']);
 Route::get('/brandList',[BrandController::class,'BrandList']);
 
 // Category list
@@ -33,6 +39,7 @@ Route::get('/ListProductByRemark/{remark}',[ProductController::class,'ListProduc
 Route::get('/ListProductByBrand/{id}',[ProductController::class,'ListProductByBrand']);
 // Slider
 Route::get('/ListProductBySlider',[ProductController::class,'ListProductBySlider']);
+Route::post('/add-slider',[ProductController::class,'addSlider']);
 // Product Details
 Route::get('/ProductDetailsById/{id}',[ProductController::class,'ProductDetailsById']);
 // Product Review
@@ -64,3 +71,25 @@ Route::get('/RemoveWishlist/{product_id}',[ProductController::class,'RemoveWishl
 Route::post('/create-cart',[ProductController::class,'CreateProductCrtList'])->middleware([TokenAuthenticate::class]);
 Route::get('/CartList',[ProductController::class,'CartList'])->middleware([TokenAuthenticate::class]);
 Route::get('/RemoveCart/{product_id}',[ProductController::class,'RemoveCart'])->middleware([TokenAuthenticate::class]);
+
+// Invoice
+Route::get('/create-invoice',[InvoiceController::class,'InvoiceCreate'])->middleware([TokenAuthenticate::class]);
+
+
+
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+
+Route::post('/insertSSLCommerzAccount',[SslcommerzAccountController::class,'insertSSLCommerzAccount']);
+//SSLCOMMERZ END
+

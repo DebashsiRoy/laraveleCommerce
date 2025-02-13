@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductSlider extends Model
 {
-    //
+    protected $fillable=[
+      'title',
+      'short_des',
+      'price',
+      'image',
+      'product_id',
+    ];
 }

@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string('total',50);
             $table->string('vat',50);
             $table->string('payable',50);
-            $table->string('cus_details',50);
-            $table->string('tran_id',50);
-            $table->string('val_id',50);
-            $table->enum('delivery_status',['pending','processing','completed']);
-            $table->string('payment_status',50);
+            $table->string('cus_details',500);
+            $table->string('ship_details',500);
+            $table->string('tran_id',500);
+            $table->string('val_id',100)->default(0);
+            $table->enum('delivery_status',['Pending','Processing','Completed']);
+            $table->string('payment_status');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
                 ->cascadeOnUpdate()
